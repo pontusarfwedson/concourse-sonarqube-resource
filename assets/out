@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -e
 
 exec 3>&1 # make stdout available as fd 3 for the result
 exec 1>&2 # redirect all output to stderr for logging
@@ -171,14 +171,14 @@ else
   exit 1
 fi
 
-jq -n "{
-  version: {ce_task_id: \"${ceTaskId:?}\"},
-  metadata: [
-    { name: \"project_key\", value: \"${projectKey:?}\" },
-    { name: \"server_url\", value: \"${serverUrl:?}\" },
-    { name: \"server_version\", value: \"${serverVersion:?}\" },
-    { name: \"dashboard_url\", value: \"${dashboardUrl:?}\" },
-    { name: \"ce_task_url\", value: \"${ceTaskUrl:?}\" },
-    { name: \"scanner_type\", value: \"${scanner_type}\" }
-  ]
-}" >&3
+# jq -n "{
+#   version: {ce_task_id: \"${ceTaskId:?}\"},
+#   metadata: [
+#     { name: \"project_key\", value: \"${projectKey:?}\" },
+#     { name: \"server_url\", value: \"${serverUrl:?}\" },
+#     { name: \"server_version\", value: \"${serverVersion:?}\" },
+#     { name: \"dashboard_url\", value: \"${dashboardUrl:?}\" },
+#     { name: \"ce_task_url\", value: \"${ceTaskUrl:?}\" },
+#     { name: \"scanner_type\", value: \"${scanner_type}\" }
+#   ]
+# }" >&3
