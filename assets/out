@@ -123,8 +123,7 @@ if [ ! -z "${sonar_branch_target}" ]; then
   scanner_opts+=" -Dsonar.branch.target=\"${sonar_branch_target}\""
 fi
 
-#sonar_sources=$(jq -r '.params.sources // [] | join(",")' < "${payload}")
-sonar_sources=$(jq -r '.params.sources // ""' < "${payload}")
+sonar_sources=$(jq -r '.params.sources // [] | join(",")' < "${payload}")
 if [ ! -z "${sonar_sources}" ]; then
   scanner_opts+=" -Dsonar.sources=\"${sonar_sources}\""
 fi
