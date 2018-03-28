@@ -77,10 +77,7 @@ else
 fi
 
 sonar_project_key=$(jq -r '.params.project_key // ""' < "${payload}")
-if [ -z "${sonar_project_key}" ]; then
-  echo "error: params.project_key has not been specified."
-  exit 1
-else
+if [ ! -z "${sonar_project_key}" ]; then
   scanner_opts+=" -Dsonar.projectKey=\"${sonar_project_key}\""
 fi
 
