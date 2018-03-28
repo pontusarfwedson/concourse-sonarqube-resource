@@ -12,8 +12,6 @@ source "${root}/common.sh"
 
 source="${1}"
 
-pwd
-ls
 if [ -z "${source}" ]; then
   echo "usage: $0 <path/to/source>"
   exit 1
@@ -24,8 +22,6 @@ if [ ! -d "${source}" ]; then
 fi
 
 cd "${source}"
-pwd
-ls
 
 payload=$(mktemp "${TMPDIR}/sonarqube-resource-out.XXXXXX")
 cat > "${payload}" <&0
@@ -158,14 +154,14 @@ fi
 # "additional" property.
 additional_properties=$(jq -r '.params.additional_properties' < "${payload}")
 if [ ! -z "${additional_properties}" ]; then
-  read -r -a props_kv_arr <<< "$(jq -r 'to_entries|map("\(.key)=\"\(.value|tostring)\"")|.[]' <<< "${additional_properties}")"
-  for prop_kv in "${props_kv_arr[@]}"; do
-    scanner_opts+=" -D${prop_kv}"
-  done
+  while read -r name value; do
+      prop_kv="$name=\"$value\""
+      scanner_opts+=" -D${prop_kv}"
+  done < <(jq -r 'to_entries[] | "\(.key) \(.value)"' <<< "${additional_properties}")
 fi
 
 cd "${project_path}"
-ls
+
 echo "Starting sonar-scanner (type: ${scanner_type})..."
 eval "${scanner_bin} ${scanner_opts}"
 
