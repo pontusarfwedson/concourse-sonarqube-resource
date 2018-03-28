@@ -171,14 +171,14 @@ else
   exit 1
 fi
 
-# jq -n "{
-#   version: {ce_task_id: \"${ceTaskId:?}\"},
-#   metadata: [
-#     { name: \"project_key\", value: \"${projectKey:?}\" },
-#     { name: \"server_url\", value: \"${serverUrl:?}\" },
-#     { name: \"server_version\", value: \"${serverVersion:?}\" },
-#     { name: \"dashboard_url\", value: \"${dashboardUrl:?}\" },
-#     { name: \"ce_task_url\", value: \"${ceTaskUrl:?}\" },
-#     { name: \"scanner_type\", value: \"${scanner_type}\" }
-#   ]
-# }" >&3
+jq -n "{
+  version: {ce_task_id: \"${ceTaskId:?}\"},
+  metadata: [
+    { name: \"project_key\", value: \"${projectKey:?}\" },
+    { name: \"server_url\", value: \"${serverUrl:?}\" },
+    { name: \"server_version\", value: \"${serverVersion:?}\" },
+    { name: \"dashboard_url\", value: \"${dashboardUrl:?}\" },
+    { name: \"ce_task_url\", value: \"${ceTaskUrl:?}\" },
+    { name: \"scanner_type\", value: \"${scanner_type}\" }
+  ]
+}" >&3
