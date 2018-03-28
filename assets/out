@@ -165,6 +165,7 @@ if [ ! -z "${additional_properties}" ]; then
 fi
 
 cd "${project_path}"
+ls
 echo "Starting sonar-scanner (type: ${scanner_type})..."
 eval "${scanner_bin} ${scanner_opts}"
 
