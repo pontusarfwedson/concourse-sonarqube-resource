@@ -54,10 +54,7 @@ if [ ! -z "${sonar_organization}" ]; then
 fi
 
 sonar_login=$(jq -r '.source.login // ""' < "${payload}")
-if [ -z "${sonar_login}" ]; then
-  echo "error: source.login has not been specified."
-  exit 1
-else
+if [ ! -z "${sonar_login}" ]; then
   scanner_opts+=" -Dsonar.login=\"${sonar_login}\""
 fi
 
