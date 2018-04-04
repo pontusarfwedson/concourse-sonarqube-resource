@@ -157,9 +157,9 @@ fi
 
 REPO="notify"
 BASE_PATH="go/src/bitbucket.org/lightelligence"
-mkdir -p ${BASE_PATH}
+mkdir -p "${BASE_PATH}"
 export IMPORT_PATH="${BASE_PATH}/${REPO}"
-ln -s ${PWD}/${project_path} ${IMPORT_PATH}
+ln -s "${PWD}/${project_path}" "${IMPORT_PATH}"
 cd ${IMPORT_PATH}
 
 #cd "${project_path}"
