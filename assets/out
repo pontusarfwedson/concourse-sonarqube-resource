@@ -155,14 +155,15 @@ if [ ! -z "${additional_properties}" ]; then
   done < <(jq -r 'to_entries[] | "\(.key) \(.value)"' <<< "${additional_properties}")
 fi
 
-REPO="notify"
-BASE_PATH="/go/src/bitbucket.org/lightelligence"
-mkdir -p "${BASE_PATH}"
-export IMPORT_PATH="${BASE_PATH}/${REPO}"
-ln -s "${PWD}/${project_path}" "${IMPORT_PATH}"
-cd ${IMPORT_PATH}
-
-#cd "${project_path}"
+go_repo_path=$(jq -r '.params.go_repo_path // ""' < "${payload}")
+if [ ! -z "${go_repo_path}" ]; then
+  mkdir -p "${go_repo_path}"
+  export IMPORT_PATH="${go_repo_path}"
+  ln -s "${PWD}/${project_path}" "${go_repo_path}"
+  cd "${IMPORT_PATH}"
+else
+  cd "${project_path}"
+fi
 
 echo "Starting sonar-scanner (type: ${scanner_type})..."
 eval "${scanner_bin} ${scanner_opts}"
