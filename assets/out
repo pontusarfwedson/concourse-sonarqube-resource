@@ -158,7 +158,7 @@ fi
 go_repo_path=$(jq -r '.params.go_repo_path // ""' < "${payload}")
 if [ ! -z "${go_repo_path}" ]; then
   mkdir -p "${go_repo_path}"
-  export IMPORT_PATH="${go_repo_path}"
+  export IMPORT_PATH="${GOPATH}"/"${go_repo_path}"
   ln -s "${PWD}/${project_path}" "${go_repo_path}"
   cd "${IMPORT_PATH}"
 else
