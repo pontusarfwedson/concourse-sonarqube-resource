@@ -98,18 +98,7 @@ quality gate associated with a project are not met.
   If the resource itself has a maven_settings configuration, this key will override
   it's value.
 
-### in: Fetch result of SonarQube analysis
-
-The action will place two JSON files into the resource's folder which are fetched from
-the SonarQube Web API:
-
-* qualitygate_project_status.json
-  Quality gate status of the compute engine task that was triggered by the resource
-  during the out action.
-  Format: https://next.sonarqube.com/sonarqube/web_api/api/qualitygates/project_status
-* ce_task_info.json
-  Information about the compute engine task that performed the analysis.
-  Format: https://next.sonarqube.com/sonarqube/web_api/api/ce/task
+### in: implemented as no-ops
 
 ## Full example
 
