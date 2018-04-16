@@ -156,7 +156,7 @@ if [ ! -z "${additional_properties}" ]; then
 fi
 
 REPO="repo"
-BASE_PATH="/go/src/bitbucket.org/lightelligence/repo"
+BASE_PATH="/go/src/bitbucket.org/lightelligence"
 mkdir -p "${BASE_PATH}"
 export IMPORT_PATH="${BASE_PATH}/${REPO}"
 ln -s "${PWD}/${project_path}" "${IMPORT_PATH}"
