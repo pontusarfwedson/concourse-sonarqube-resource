@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -ex
 
 exec 3>&1 # make stdout available as fd 3 for the result
 exec 1>&2 # redirect all output to stderr for logging
@@ -151,6 +151,7 @@ additional_properties=$(jq -r '.params.additional_properties' < "${payload}")
 if [ ! -z "${additional_properties}" ]; then
   while read -r name value; do
       prop_kv="$name=\"$value\""
+      echo "Added additional prop k/v: ${prop_kv}"
       scanner_opts+=" -D${prop_kv}"
   done < <(jq -r 'to_entries[] | "\(.key) \(.value)"' <<< "${additional_properties}")
 fi
