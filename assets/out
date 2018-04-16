@@ -155,12 +155,12 @@ if [ ! -z "${additional_properties}" ]; then
   done < <(jq -r 'to_entries[] | "\(.key) \(.value)"' <<< "${additional_properties}")
 fi
 
+REPO="repo"
 BASE_PATH="/go/src/bitbucket.org/lightelligence/repo"
 mkdir -p "${BASE_PATH}"
 export IMPORT_PATH="${BASE_PATH}/${REPO}"
 ln -s "${PWD}/${project_path}" "${IMPORT_PATH}"
 cd "${IMPORT_PATH}"
-
 #cd "${project_path}"
 
 echo "Starting sonar-scanner (type: ${scanner_type})..."
